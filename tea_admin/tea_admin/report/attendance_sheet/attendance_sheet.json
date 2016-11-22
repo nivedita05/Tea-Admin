@@ -1,0 +1,18 @@
+{
+ "add_total_row": 0, 
+ "apply_user_permissions": 1, 
+ "creation": "2016-11-21 12:05:24.959696", 
+ "disabled": 0, 
+ "docstatus": 0, 
+ "doctype": "Report", 
+ "idx": 0, 
+ "is_standard": "Yes", 
+ "modified": "2016-11-21 12:05:26.609944", 
+ "modified_by": "Administrator", 
+ "module": "Tea Admin", 
+ "name": "Attendance Sheet", 
+ "owner": "Administrator", 
+ "ref_doctype": "Wages Entry", 
+ "report_name": "Attendance Sheet", 
+ "report_type": "Script Report"
+}

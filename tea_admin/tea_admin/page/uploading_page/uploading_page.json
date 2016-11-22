@@ -1,0 +1,19 @@
+{
+ "content": null, 
+ "creation": "2016-11-07 11:13:10.530766", 
+ "docstatus": 0, 
+ "doctype": "Page", 
+ "icon": "icon-upload", 
+ "idx": 0, 
+ "modified": "2016-11-07 11:13:12.313876", 
+ "modified_by": "Administrator", 
+ "module": "Tea Admin", 
+ "name": "uploading-page", 
+ "owner": "Administrator", 
+ "page_name": "uploading page", 
+ "roles": [], 
+ "script": null, 
+ "standard": "Yes", 
+ "style": null, 
+ "title": "Uploading Page"
+}

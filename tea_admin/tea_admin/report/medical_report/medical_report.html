@@ -1,0 +1,53 @@
+<style>
+    .print-format table, .print-format tr,
+    .print-format td, .print-format div, .print-format p {
+        font-family: Monospace;
+        line-height: 200%;
+        vertical-align: middle;
+    }
+
+    @media screen {
+        .print-format {
+            max-width: 13in;
+            padding: 0.25in;
+            min-height: 8.5in;
+        }
+    }
+</style>
+<div style="margin-bottom: 7px;" class="text-center">
+	
+</div>
+
+
+<h3 class="text-center">
+	
+	{%= filters.date %}
+	<br>
+	{%= __("Company:") %}
+	{%= filters.company_name %}
+	<br>
+    {%= __("Garden:") %}
+    {%= filters.garden %}
+    <br>
+	
+</h3>
+
+
+
+<h2 class="text-center">{%= __("Medical Report") %}</h2>
+<hr>
+<table class="table table-bordered">
+    <thead>
+       
+    <tr>
+        <th>Sr No.</th>
+        <th>Emp Code</th>
+        <th>Emp Name</th>
+        <th>Family Id</th>
+
+        <th>Medical Expenses</th>
+       
+    </tr>
+    </thead>
+   
+</table>

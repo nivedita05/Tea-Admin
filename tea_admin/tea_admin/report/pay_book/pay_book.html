@@ -1,0 +1,128 @@
+<style>
+    .print-format table, .print-format tr,
+    .print-format td, .print-format div, .print-format p {
+        font-family: Monospace;
+        line-height: 200%;
+        vertical-align: middle;
+    }
+
+    @media screen {
+        .print-format {
+            max-width: 13in;
+            padding: 0.25in;
+            min-height: 8.5in;
+        }
+    }
+</style>
+<div style="margin-bottom: 7px;" class="text-center">
+    
+</div>
+
+
+<h5 class="text-center">
+    {%= ("Garden") %}
+    {%= __(":") %}
+    {%= filters.garden %}
+    <br>
+    {%= __("From Date :") %}
+    {%= filters.date1 %}
+    <br>
+    {%= __("To Date:") %}
+    {%= filters.date2 %}
+    <br>
+
+</h5>
+<hr>
+
+
+<h2 class="text-center"><b>{%= __("Pay Book") %}</b></h2>
+<hr>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th class="text-center" colspan=4></th>
+        <th class="text-center" colspan=8>Addition</th>
+        
+        <th class="text-center" colspan=8>Decuction</th>
+        
+      
+       
+    <tr>    
+    <tr>
+        
+        <th>Emp Code</th>
+        <th>Emp Name</th>
+        
+       
+        <th>Count</th>
+        <th>Pf No</th>
+
+        <th>Pay</th>
+        <th>FC</th>
+        <th>L/PICE</th>
+        <th>Sick</th>
+        <th>MAT</th>
+        <th>LEV PAY</th>
+        <th>OTHER</th>
+        <th class="text-center">Total</th>
+        
+
+        <th>P/FUND</th>
+        <th>KHARCH</th>
+        <th>LP PAID</th>
+        <th>ADV</th>
+        <th>RATION</th>
+        <th>ELEC</th>
+        <th>LIC</th>
+        <th class="text-center">Total</th>
+        
+        
+     </tr>
+    </thead>
+    <tbody>
+        {% for(var i=0, l=report.data.length; i<l; i++) { %}
+            
+            <tr>
+                
+                <td class="text-left">{%= report.data[i].emp_code %}</td>
+                <td class="text-left">{%= report.data[i].name1 %}</td>
+                
+               
+                
+                <td class="text-left">{%= report.data[i].count_attendance_3rd_char_1 %}</td>
+                <td class="text-left">{%= report.data[i].pf_no %}</td>
+
+
+
+                <td class="text-left">{%= report.data[i].pay %}</td>
+                <td class="text-left">{%= report.data[i].food_conssesion %}</td>
+                <td class="text-left">{%= report.data[i].l_piece %}</td>
+                <td class="text-left">{%= report.data[i].sick %}</td>
+                <td class="text-left">{%= report.data[i].maternity %}</td>
+                <td class="text-left">{%= report.data[i].leave_pay %}</td>
+                <td class="text-left">{%= report.data[i].other %}</td>
+                
+                <td class="text-left">{%= report.data[i].total_addition %}</td>
+                
+                <td class="text-left">{%= report.data[i].p_per_fund %}</td>
+                <td class="text-left">{%= report.data[i].kharcha %}</td>
+                <td class="text-left">{%= report.data[i].lp_paid %}</td>
+                <td class="text-left">{%= report.data[i].advance %}</td>
+                <td class="text-left">{%= report.data[i].ration %}</td>
+                <td class="text-left">{%= report.data[i].electricity %}</td>
+                <td class="text-left">{%= report.data[i].lic %}</td>
+
+                <td class="text-left">{%= report.data[i].total_deduction %}</td>
+
+
+            </tr>   
+             <tr><th colspan=20 align="right">Net Pay : {%= report.data[i].net_amount %}</th></tr>
+        {% } %}
+       
+    </tbody>
+</table>
+
+
+
+
+
