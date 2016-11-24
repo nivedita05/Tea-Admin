@@ -20,41 +20,46 @@
 
 
 <h5 class="text-center">
-    {%= ("Garden") %}
+  <b>  {%= ("Pay Book") %}
     {%= __(":") %}
     {%= filters.garden %}
     <br>
-    {%= __("From Date :") %}
+    {%= __("Date ") %}
     {%= filters.date1 %}
-    <br>
-    {%= __("To Date:") %}
+    {%= __("to ") %}
     {%= filters.date2 %}
-    <br>
+  <br>
+</b>
 
 </h5>
-<hr>
+<hr></hr>
 
-
-<h2 class="text-center"><b>{%= __("Pay Book") %}</b></h2>
-<hr>
 <table class="table table-bordered">
     <thead>
     <tr>
-        <th class="text-center" colspan=4></th>
-        <th class="text-center" colspan=8>Addition</th>
+        <th class="text-center" colspan=2></th>
+        <th class="text-center" colspan=3>Hazre</th>
+        <th class="text-center" colspan=1></th>
+
+        <th class="text-center" colspan=9>Addition</th>
         
-        <th class="text-center" colspan=8>Decuction</th>
-        
+        <th class="text-center" colspan=9>Deduction</th>
+        <th class="text-center" colspan=1></th>
       
        
-    <tr>    
+    <tr>  
+
+      
     <tr>
         
         <th>Emp Code</th>
         <th>Emp Name</th>
         
        
-        <th>Count</th>
+        <th>S</th>
+        <th>N</th>
+        <th>T</th>
+
         <th>Pf No</th>
 
         <th>Pay</th>
@@ -65,6 +70,7 @@
         <th>LEV PAY</th>
         <th>OTHER</th>
         <th class="text-center">Total</th>
+        <th>B/F</th>
         
 
         <th>P/FUND</th>
@@ -75,6 +81,9 @@
         <th>ELEC</th>
         <th>LIC</th>
         <th class="text-center">Total</th>
+        <th>C/F</th>
+
+        <th>Stamp</th>
         
         
      </tr>
@@ -89,8 +98,13 @@
                 
                
                 
+                
+                <td class="text-left">{%= report.data[i].count_attendance_special %}</td>
+                <td class="text-left">{%= report.data[i].count_attendance_normal %}</td>
                 <td class="text-left">{%= report.data[i].count_attendance_3rd_char_1 %}</td>
+                
                 <td class="text-left">{%= report.data[i].pf_no %}</td>
+
 
 
 
@@ -101,8 +115,10 @@
                 <td class="text-left">{%= report.data[i].maternity %}</td>
                 <td class="text-left">{%= report.data[i].leave_pay %}</td>
                 <td class="text-left">{%= report.data[i].other %}</td>
+
                 
                 <td class="text-left">{%= report.data[i].total_addition %}</td>
+                 <td class="text-left">{%= report.data[i].b_forward %}</td>
                 
                 <td class="text-left">{%= report.data[i].p_per_fund %}</td>
                 <td class="text-left">{%= report.data[i].kharcha %}</td>
@@ -113,10 +129,18 @@
                 <td class="text-left">{%= report.data[i].lic %}</td>
 
                 <td class="text-left">{%= report.data[i].total_deduction %}</td>
+                 <td class="text-left">{%= report.data[i].carry_forward %}</td>
 
 
             </tr>   
-             <tr><th colspan=20 align="right">Net Pay : {%= report.data[i].net_amount %}</th></tr>
+             <tr>
+                <th colspan=2 class="text-left">Gross Pay : {%= report.data[i].gross_amount %} </th>
+                <th colspan=9 class="text-left">Net Pay : {%= report.data[i].net_amount %}</th>
+                <th colspan=14 class="text-center">Signature : </th>
+             </tr>
+             <tr><td colspan=25></td></tr>
+
+             
         {% } %}
        
     </tbody>
