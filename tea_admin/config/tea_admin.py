@@ -13,6 +13,12 @@ def get_data():
 					"type": "doctype",
 					"name": "Wages Entry",
 					"description": _("Default settings for buying transactions.")
+				},
+
+				{
+					"type": "doctype",
+					"name": "Make Payment",
+					"description": _("Default settings for buying transactions.")
 				}
 		
 		]
@@ -81,19 +87,7 @@ def get_data():
 		]
 		},
 
-		{
-			"label": _("Electricity"),
-			"icon": "icon-cog",
-			"items": [
-				{
-					"type": "doctype",
-					"name": "Electricity Charges",
-					"description": _("Default settings for buying transactions.")
-				}
-
-				
-		]
-		},
+		
 
 		{
 			"label": _("Ration"),
@@ -118,27 +112,33 @@ def get_data():
 			"label": _("Reports"),
 			"icon": "icon-cog",
 			"items": [
+				
 				{
 					"type": "report",
 					"is_query_report": True,
-					"name": "Personal Information Report",
-					"doctype": "Labour Information",
+					"name": "Pay Book",
+					"doctype": "Salary Structure",
 				},
 
-
 				{
 					"type": "report",
 					"is_query_report": True,
-					"name": "Family Information Report",
-					"doctype": "Dependent Details",
+					"name":"Consolodate Statement",
+					"doctype": "Salary Structure",
 				},
 
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name":  "Wages Summary",
+					"doctype": "Salary Structure",
+				},
 
 				{
 					"type": "report",
 					"is_query_report": True,
-					"name": "Medical Report",
-					"doctype":"Medical Benefit Entry",
+					"name": "Leaf Pice Payment",
+					"doctype": "Salary Structure",
 				}
 			]
 		},
@@ -162,14 +162,30 @@ def get_data():
 			"label": _("Payment"),
 			"icon": "icon-cog",
 			"items": [
+			{
+					"type": "doctype",
+					"name": "Make Payment",
+					
+				}
+				
+			]
+		},
+
+
+
+		{
+			"label": _("Medical Reports"),
+			"icon": "icon-cog",
+			"items": [
 				{
 					"type": "report",
 					"is_query_report": True,
-					"name": "Pay Book",
-					"doctype": "Salary Structure",
+					"name": "Sick Register",
+					"doctype": "Wages Entry",
 				}
 			]
-		}
+		},
+
 
 
 

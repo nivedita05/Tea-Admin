@@ -12,222 +12,109 @@ def execute(filters=None):
 	
 	columns = get_columns()
 
-	# initialized the variables with zero
+	total_add=0
+	total_sub=0
 
-	total_other=0
-	total_sick=0
-	total_pay=0
-	total_maternity=0
-	tota_leave=0
-	total_food_conssesion=0
-	total_l_piece=0
+	net_amount=0
 
-	total_addition=0
+	report_entries=get_report_entries(filters)
+
+	for i in report_entries:
+
+		emp_category_and_pf_no=get_category_and_pf_no(i.emp_code,filters)
+		attendence=get_attendence(i.emp_code,filters)
+		special=get_attendence_special(i.emp_code,filters)
+		normal=get_attendence_normal(i.emp_code,filters)
+
+		pay=get_pay(i.emp_code,filters)
+		fc=get_fc(i.emp_code,filters)
+		l_piece=get_l_piece(i.emp_code,filters)
+		sick=get_sick(i.emp_code,filters)
+		maternity=get_mat(i.emp_code,filters)
+		leave_pay=get_leave_pay(i.emp_code,filters)
+		other=get_other(i.emp_code,filters)
+
+		total_add=pay[0][0]+fc[0][0]+l_piece[0][0]+sick[0][0]+maternity[0][0]+leave_pay[0][0]+other[0][0]
+
+		p_per_fund=pay[0][0]*0.12
+		kharcha=get_kharcha(i.emp_code,filters)
+		lp_paid=get_lp_paid(i.emp_code,filters)
+		advance=get_advance(i.emp_code,filters)
+		ration=get_ration(i.emp_code,filters)
+		lic=get_lic(i.emp_code,filters)
+
+
+		total_sub=p_per_fund+kharcha[0][0]+lp_paid[0][0]+advance[0][0]+ration[0][0]+lic[0][0]
 	
-	total_p_per_fund=0
-	total_kharcha=0
-	total_lp_paid=0
-	total_advance=0
-	total_ration=0
-	total_electricity=0
-	total_lic=0
+		net_amount=total_add-total_sub
 
-	total_deduction=0
-
-	report_entries = get_report_entries(filters)
+		data.append([i.emp_code,i.name1,emp_category_and_pf_no[0][0],attendence,special,normal,emp_category_and_pf_no[0][1],pay,fc,l_piece,sick,maternity,leave_pay,other,total_add,p_per_fund,kharcha,lp_paid,advance,ration,lic,total_sub,net_amount])
 	
 
-
-	for sle in report_entries:
-
-		number_of_day_present= get_number_of_days_work(sle.emp_code)
-
-		present_as_special_cat=get_number_of_days_work_as_special(sle.emp_code,filters)
-		present_as_normal_cat=get_number_of_days_work_as_normal(sle.emp_code,filters)
-
-		
-
-		pf=get_pf_no(sle.emp_code)
-
-		desig=get_des_category(sle.emp_code)
-
-		# ADDITION REALATED
-
-		pay=get_pay(pf)
-#get the total pay for a time span and for a particular emp
-		total_pay=pay[0][0]*number_of_day_present[0][0]
-
-		food_conssesion=get_food_conssesion(pf)
-#get the total food conssesion for a time span and for a particular emp
-		total_food_conssesion=food_conssesion[0][0]*number_of_day_present[0][0]
-
-		l_piece=get_l_piece(pf)
-#get the total leave piece for a time span and for a particular emp
-		total_l_piece=l_piece[0][0]*number_of_day_present[0][0]
-
-		sick=get_sick(pf)
-#get the total sick pay  for a time span and for a particular emp
-		total_sick=sick[0][0]*number_of_day_present[0][0]
-
-		maternity=get_maternity(pf)
-#get the total maternity pay for a time span and for a particular emp
-		total_maternity=maternity[0][0]*number_of_day_present[0][0]
-
-		leave_pay=get_leave_pay(pf)
-#get the total leave pay  for a time span and for a particular emp
-		tota_leave=leave_pay[0][0]*number_of_day_present[0][0]
-
-		other=get_other(pf)
-#get the total other pay  for a time span and for a particular emp
-		total_other=other[0][0]*number_of_day_present[0][0]
-
-#get the total addative value  for a time span and for a particular emp
-		total_addition=total_other+total_sick+total_pay+total_maternity+tota_leave+total_food_conssesion+total_l_piece
+	return columns,data
 
 
-
-		# DEDUCTION RELATED
-		p_per_fund=get_pay(pf)
-#get the total pf fun for a time span and for a particular emp which is 12% of the basic
-		total_p_per_fund=total_addition*0.12
-
-		kharcha=get_kharcha(pf)
-#get the total kharcha for a time span and for a particular emp
-		total_kharcha=kharcha[0][0]*number_of_day_present[0][0]
-
-		lp_paid=get_lp_paid(pf)
-#get the total lp paid for a time span and for a particular emp
-		total_lp_paid=lp_paid[0][0*number_of_day_present[0][0]]
-
-		advance=get_advance(pf)  
-#get the total advance for a time span and for a particular emp
-		total_advance=advance[0][0]*number_of_day_present[0][0]
-
-		ration=get_ration(pf)
-#get the total ration for a time span and for a particular emp
-		total_ration=ration[0][0]*number_of_day_present[0][0]
-
-		electricity=get_electricity(pf)
-#get the total electricity for a time span and for a particular emp
-		total_electricity=electricity[0][0]*number_of_day_present[0][0]
-
-		lic=get_lic(pf)
-#get the total lic for a time span and for a particular emp
-		total_lic=lic[0][0]*number_of_day_present[0][0]
-
-#get the total deduction for a time span and for a particular emp
-		total_deduction=total_p_per_fund+total_kharcha+total_lp_paid+total_advance+total_ration+total_electricity+total_lic
-
-		gross_pay=total_addition-(total_deduction+total_food_conssesion)
-
-		net_pay=gross_pay-(gross_pay%10)
-		
-		carry_forward=gross_pay%10
-
-		b_forward=0
-		
-		data.append([sle.emp_code,sle.name1,desig,number_of_day_present,present_as_special_cat,present_as_normal_cat,pf,round(pay[0][0]*number_of_day_present[0][0],2),round(food_conssesion[0][0]*number_of_day_present[0][0],2),round(l_piece[0][0]*number_of_day_present[0][0],2),round(sick[0][0]*number_of_day_present[0][0],2),round(maternity[0][0]*number_of_day_present[0][0],2),round(leave_pay[0][0]*number_of_day_present[0][0],2),round(other[0][0]*number_of_day_present[0][0],2),round(total_addition,2),round(total_addition*0.12,0),round(kharcha[0][0]*number_of_day_present[0][0],2),round(lp_paid[0][0]*number_of_day_present[0][0],2),round(advance[0][0]*number_of_day_present[0][0],2),round(ration[0][0]*number_of_day_present[0][0],2),round(electricity[0][0]*number_of_day_present[0][0],2),round(lic[0][0]*number_of_day_present[0][0],2),round(total_deduction,2),round(gross_pay,2),round(b_forward,2),round(net_pay,2),round(carry_forward,2)])
-		
-
-		
-	return columns, data
-
-				# SOME BASIC INFORMATION RELATED TO THE REPORT #
 #--------------------------------------------------------------------------------------
-#fetch labour name and code from attendence table
 def get_report_entries(filters):
-	return frappe.db.sql(""" select distinct  emp_code,name1 from `tabattendence` where date between %s  and %s  order by date asc""",(filters.date1,filters.date2),as_dict=1)
+	return frappe.db.sql("""select distinct emp_code,name1 from `tabattendence` where date between %s and %s""",(filters.date1,filters.date2),as_dict=1)
 
-# get the number of days the labour worked within the time span
-def get_number_of_days_work(emp_code):
-	return frappe.db.sql(""" select count(attendance_3rd_char_1) from `tabattendence` where emp_code=%s order by date asc""",(emp_code))
+def get_category_and_pf_no(emp_code,filters):
+	return frappe.db.sql("""select category,pf_no from `tabLabour Information` where emp_id=%s and garden=%s""",(emp_code,filters.garden))
 
+def get_attendence(emp_code,filters):
+	return frappe.db.sql("""select count(emp_code) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
 
-def get_number_of_days_work_as_special(emp_code,filters):
-	return frappe.db.sql(""" select count(attendance_3rd_char_1) from `tabattendence` where emp_code=%s and  attendance_3rd_char_1="Special Category"  and  date between %s  and %s order by date asc""",(emp_code,filters.date1,filters.date2))
+def get_attendence_special(emp_code,filters):
+	return frappe.db.sql("""select count(emp_code) from `tabattendence` where date between %s and %s and emp_code=%s and attendance_3rd_char_1="SPECIAL" """,(filters.date1,filters.date2,emp_code))
 
-def get_number_of_days_work_as_normal(emp_code,filters):
-	return frappe.db.sql(""" select count(attendance_3rd_char_1) from `tabattendence` where emp_code=%s and  attendance_3rd_char_1="Normal Category"  and  date between %s  and %s order by date asc""",(emp_code,filters.date1,filters.date2))
+def get_attendence_normal(emp_code,filters):
+	return frappe.db.sql("""select count(emp_code) from `tabattendence` where date between %s and %s and emp_code=%s and attendance_3rd_char_1="NORMAL" """,(filters.date1,filters.date2,emp_code))
 
-# get the category in which the labour belongs to
-def get_des_category(emp_code):
-	return frappe.db.sql(""" select category from `tabLabour Information` where emp_id=%s""",(emp_code))
+#------------------------------------------------------------------------------------
+def get_pay(emp_code,filters):
+	return frappe.db.sql("""select sum(pay) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
 
+def get_fc(emp_code,filters):
+	return frappe.db.sql("""select sum(food_conssesion) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
 
-#get the pf no of the labour
-def get_pf_no(emp_code):
-	return frappe.db.sql(""" select pf_no from `tabLabour Information` where emp_id=%s""",(emp_code))
+def get_l_piece(emp_code,filters):
+	return frappe.db.sql("""select sum(l_piece) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
 
-#--------------------------------------------------------------------------------------
+def get_sick(emp_code,filters):
+	return frappe.db.sql("""select sum(sick) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
 
-# EVERYTHING RELATED TO ADDITION
-
-# Select additive the values from salary structure
-
-def get_pay(pf):
-	return frappe.db.sql(""" select sum(pay) from `tabSalary Structure`  where pf_no = %s group by pf_no""",(pf))
-
-
-def get_food_conssesion(pf):
-	return frappe.db.sql(""" select sum(food_conssesion) from `tabSalary Structure` where pf_no = %s""",(pf))
+def get_mat(emp_code,filters):
+	return frappe.db.sql("""select sum(maternity) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
 
 
-def get_l_piece(pf):
-	return frappe.db.sql(""" select sum(l_piece) from `tabSalary Structure` where pf_no = %s""",(pf))
+def get_leave_pay(emp_code,filters):
+	return frappe.db.sql("""select sum(leave_pay) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
+
+def get_other(emp_code,filters):
+	return frappe.db.sql("""select sum(other) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
 
 
-def get_sick(pf):
-	return frappe.db.sql(""" select sum(sick) from `tabSalary Structure` where pf_no = %s""",(pf))
 
 
-def get_maternity(pf):
-	return frappe.db.sql(""" select sum(maternity) from `tabSalary Structure` where pf_no = %s""",(pf))
 
 
-def get_leave_pay(pf):
-	return frappe.db.sql(""" select sum(leave_pay) from `tabSalary Structure` where pf_no = %s""",(pf))
+def get_kharcha(emp_code,filters):
+	return frappe.db.sql("""select sum(kharcha) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
+
+def get_lp_paid(emp_code,filters):
+	return frappe.db.sql("""select sum(lp_paid) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
+
+def get_ration(emp_code,filters):
+	return frappe.db.sql("""select sum(ration) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
 
 
-def get_other(pf):
-	return frappe.db.sql(""" select sum(other) from `tabSalary Structure` where pf_no = %s""",(pf))
+def get_lic(emp_code,filters):
+	return frappe.db.sql("""select sum(lic) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
 
-#--------------------------------------------------------------------------------------
-
-# EVERYTHING RELATED TO DEDUCTION
-
-# Select deductive values from salary structure
-
-#def get_p_per_fund(pf):
-	#return frappe.db.sql(""" select sum(p_per_fund) from `tabSalary Structure` where pf_no = %s """,(pf))
+def get_advance(emp_code,filters):
+	return frappe.db.sql("""select sum(advance) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
 
 
-def get_kharcha(pf):
-	return frappe.db.sql(""" select sum(kharcha) from `tabSalary Structure` where pf_no = %s""",(pf))
-
-
-def get_lp_paid(pf):
-	return frappe.db.sql(""" select sum(lp_paid) from `tabSalary Structure` where pf_no = %s""",(pf))
-
-
-def get_advance(pf):
-	return frappe.db.sql(""" select sum(advance) from `tabSalary Structure` where pf_no = %s""",(pf))
-
-
-def get_ration(pf):
-	return frappe.db.sql(""" select sum(ration) from `tabSalary Structure` where pf_no = %s""",(pf))
-
-
-def get_electricity(pf):
-	return frappe.db.sql(""" select sum(electricity) from `tabSalary Structure` where pf_no = %s""",(pf))
-
-
-def get_lic(pf):
-	return frappe.db.sql(""" select sum(lic) from `tabSalary Structure` where pf_no = %s""",(pf))
-
-
-#--------------------------------------------------------------------------------------
-
-# THE COLUMNS SHOWN IN THE REPORT
 
 
 def get_columns():
@@ -404,13 +291,6 @@ def get_columns():
 	    })
 
 
-	    	columns.append({
-				"fieldname": "electricity",
-				"label": _("Electricity"),
-				"fieldtype": "Float",
-				"option":"Salary Structure",
-				"width": 90
-	    })
 
 	    	columns.append({
 				"fieldname": "lic",
@@ -428,36 +308,12 @@ def get_columns():
 	    })
 
 	    	columns.append({
-				"fieldname": "gross_amount",
-				"label": _("Gross Amount"),
-				"fieldtype": "Float",
-				"width": 90
-	    })
-
-	    	
-	    	columns.append({
-				"fieldname": "b_forward",
-				"label": _("Brought Forward"),
-				"fieldtype": "Float",
-				"width": 90
-	    })
-
-
-
-	    	columns.append({
 				"fieldname": "net_amount",
 				"label": _("Net Amount"),
 				"fieldtype": "Float",
 				"width": 90
 	    })
 
-
-	    	columns.append({
-				"fieldname": "carry_forward",
-				"label": _("Carry Forward"),
-				"fieldtype": "Float",
-				"width": 90
-	    })
 
 
 

@@ -6,7 +6,7 @@ def get_data():
 	return [
 		{
 			"module_name": "Tea Admin",
-			"color": "#F1C40F",
+			"color": "#3498db",
 			"icon": "octicon octicon-file-directory",
 			"type": "module",
 			"label": _("Tea Admin")

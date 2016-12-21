@@ -5,10 +5,6 @@
 from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
-from datetime import datetime,timedelta
-from frappe import _
-from frappe import utils
 
-class attendence(Document):
+class AdvanceEntry(Document):
 	pass
-

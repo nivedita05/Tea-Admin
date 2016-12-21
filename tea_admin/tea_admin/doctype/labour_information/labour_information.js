@@ -27,4 +27,10 @@ frappe.ui.form.on("Labour Information", "validate", function(frm) {
     }
        
 });
+
+frappe.ui.form.on("Labour Information", "validate", function(frm) {
+  for(var i in frm.doc.salary_structure){
+     frm.doc.salary_structure[i].category = frm.doc.category;
+     }
+  });
    

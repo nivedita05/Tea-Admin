@@ -12,7 +12,7 @@ data = {
 			'items': ['Medical Benefit Entry','House Repairing Entry','Ration Distribution']
 		},
 		{
-			'items': ['Leave Application','Other Benefit Entry','Electricity Charges' ]		
+			'items': ['Leave Application','Other Benefit Entry']		
 			}
 	]
 }

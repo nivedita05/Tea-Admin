@@ -18,7 +18,7 @@ def execute(filters=None):
 
 	for sle in report_entries:
 		
-		data.append([sle.date,sle.emp_code,sle.name1,sle.kamjari_code,sle.kamjari_head,sle.attendence,sle.attendance_2nd_char,sle.attendance_3rd_char_1])
+		data.append([sle.date,sle.emp_code,sle.name1,sle.attendence,sle.attendance_2nd_char,sle.attendance_3rd_char_1])
 	
 	return columns, data
 
@@ -55,24 +55,7 @@ def get_columns():
 	    })
 
 
-		columns.append({
-				"fieldname": "kamjari_code",
-				"label": _("Kamjari Code"),
-				"fieldtype": "Data",
-				"option":"attendence",
-				"width": 135
-	    })
-
-
 		
-
-	    	columns.append({
-				"fieldname": "kamjari_head",
-				"label": _(" Kamjari Head "),
-				"fieldtype": "Data",
-				"option":"attendence",
-				"width": 135
-	    })
 
 	    	columns.append({
 				"fieldname": "attendence",

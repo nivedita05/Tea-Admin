@@ -1,7 +1,7 @@
 // Copyright (c) 2016, Frappe and contributors
 // For license information, please see license.txt
 
-frappe.query_reports["Pay Book"] = {
+frappe.query_reports["Leaf Pice Payment"] = {
 	"filters": [
 	{
             "fieldname":"date1",

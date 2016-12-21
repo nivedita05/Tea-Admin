@@ -41,9 +41,9 @@
         <th class="text-center" colspan=3>Hazre</th>
         <th class="text-center" colspan=1></th>
 
-        <th class="text-center" colspan=9>Addition</th>
+        <th class="text-center" colspan=8>Addition</th>
         
-        <th class="text-center" colspan=9>Deduction</th>
+        <th class="text-center" colspan=7>Deduction</th>
         <th class="text-center" colspan=1></th>
       
        
@@ -70,7 +70,7 @@
         <th>LEV PAY</th>
         <th>OTHER</th>
         <th class="text-center">Total</th>
-        <th>B/F</th>
+        
         
 
         <th>P/FUND</th>
@@ -78,10 +78,10 @@
         <th>LP PAID</th>
         <th>ADV</th>
         <th>RATION</th>
-        <th>ELEC</th>
+        
         <th>LIC</th>
         <th class="text-center">Total</th>
-        <th>C/F</th>
+       
 
         <th>Stamp</th>
         
@@ -118,24 +118,22 @@
 
                 
                 <td class="text-left">{%= report.data[i].total_addition %}</td>
-                 <td class="text-left">{%= report.data[i].b_forward %}</td>
-                
+               
                 <td class="text-left">{%= report.data[i].p_per_fund %}</td>
                 <td class="text-left">{%= report.data[i].kharcha %}</td>
                 <td class="text-left">{%= report.data[i].lp_paid %}</td>
                 <td class="text-left">{%= report.data[i].advance %}</td>
                 <td class="text-left">{%= report.data[i].ration %}</td>
-                <td class="text-left">{%= report.data[i].electricity %}</td>
                 <td class="text-left">{%= report.data[i].lic %}</td>
 
                 <td class="text-left">{%= report.data[i].total_deduction %}</td>
-                 <td class="text-left">{%= report.data[i].carry_forward %}</td>
+               
 
 
             </tr>   
              <tr>
-                <th colspan=2 class="text-left">Gross Pay : {%= report.data[i].gross_amount %} </th>
-                <th colspan=9 class="text-left">Net Pay : {%= report.data[i].net_amount %}</th>
+                <th colspan=11 class="text-left">Net Pay : {%= report.data[i].net_amount %} </th>
+                
                 <th colspan=14 class="text-center">Signature : </th>
              </tr>
              <tr><td colspan=25></td></tr>

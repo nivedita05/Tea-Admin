@@ -1,0 +1,125 @@
+<style>
+    .print-format table, .print-format tr,
+    .print-format td, .print-format div, .print-format p {
+        font-family: Monospace;
+        line-height: 100%;
+        vertical-align: middle;
+        font-size: 15px;
+    }
+
+    @media screen {
+        .print-format {
+            max-width: 13in;
+            padding: 0.25in;
+            min-height: 8.5in;
+        }
+    }
+</style>
+<div style="margin-bottom: 7px;" class="text-center">
+    
+</div>
+
+
+<h4 class="text-center">
+  <b>  {%= ("Pay Book") %}
+    {%= __(":") %}
+    {%= filters.book_code %}
+    <br>
+    {%= __("Date ") %}
+    {%= filters.date1 %}
+    {%= __("to ") %}
+    {%= filters.date2 %}
+  <br>
+    {%= ("Garden") %}
+    {%= __(":") %}
+    {%= filters.garden %}
+</b>
+
+</h4>
+<hr></hr>
+
+<h4 class="text-left">
+<b> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<u> {%= ("Total Pay") %}</u>
+    {%= __(":") %}
+    {%= report.data[0].pay %}
+
+</h4>
+
+<h4 class="text-left">
+<b>  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+    {%= ("Gross Total") %}
+    {%= __(":") %}
+    {%= report.data[0].tot_earn %}
+    
+</h4>
+
+<h4 class="text-left">
+<b> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+    {%= ("Less Deduction") %}
+    {%= __(":") %}
+    {%= report.data[0].deducted_value %}
+
+
+</h4>
+
+<h4 class="text-left">
+<b> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<u> {%= ("Amount to be Paid") %}</u>
+    {%= __(":") %}
+    {%= report.data[0].net_pay %}
+
+</h4>
+
+
+
+
+
+
+
+
+
+
+<br></br>
+
+
+
+<table style="width:100%">
+  <tr>
+    <th>Add</th>
+    <th>Less</th> 
+ 
+  </tr>
+
+  <tr>
+    <td>Leaf Piece : {%= report.data[0].l_piece %}</td>
+    <td>LP Paid : {%= report.data[0].lp_paid %}</td>
+   
+  </tr>
+
+  <tr>
+    <td>Sick : {%= report.data[0].sick %}</td>
+    <td>Kharcha : {%= report.data[0].kharcha %}</td>
+  </tr>
+
+  <tr>
+    <td>Maternity : {%= report.data[0].mat %}</td>
+    <td>Advanced : {%= report.data[0].adv%}</td>
+  
+  </tr>
+
+  <tr>
+    <td>Other : {%= report.data[0].oth %}</td>
+    <td>LIC : {%= report.data[0].lic %}</td>
+   
+  </tr>
+  
+ <tr>
+    <td></td>
+    <td>P Fund: {%= report.data[0].p_fund %}</td>
+   
+  </tr>
+
+  
+</table>
+<hr></hr>

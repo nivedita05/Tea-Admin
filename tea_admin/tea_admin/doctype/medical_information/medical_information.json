@@ -1,6 +1,6 @@
 {
  "allow_copy": 0, 
- "allow_import": 0, 
+ "allow_import": 1, 
  "allow_rename": 0, 
  "autoname": "field:medical_card_no", 
  "beta": 0, 
@@ -193,11 +193,11 @@
  "image_view": 0, 
  "in_create": 0, 
  "in_dialog": 0, 
- "is_submittable": 1, 
+ "is_submittable": 0, 
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2016-11-16 17:24:33.114225", 
+ "modified": "2016-11-25 12:20:21.155017", 
  "modified_by": "Administrator", 
  "module": "Tea Admin", 
  "name": "Medical Information", 
@@ -207,7 +207,7 @@
   {
    "amend": 0, 
    "apply_user_permissions": 0, 
-   "cancel": 1, 
+   "cancel": 0, 
    "create": 1, 
    "delete": 1, 
    "email": 1, 
@@ -221,7 +221,7 @@
    "role": "Administrator", 
    "set_user_permissions": 0, 
    "share": 1, 
-   "submit": 1, 
+   "submit": 0, 
    "write": 1
   }
  ], 

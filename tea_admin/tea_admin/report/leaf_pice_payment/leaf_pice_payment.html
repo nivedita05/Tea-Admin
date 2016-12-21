@@ -1,0 +1,139 @@
+<style>
+    .print-format table, .print-format tr,
+    .print-format td, .print-format div, .print-format p {
+        font-family: Monospace;
+        line-height: 200%;
+        vertical-align: middle;
+    }
+
+    @media screen {
+        .print-format {
+            max-width: 13in;
+            padding: 0.25in;
+            min-height: 8.5in;
+        }
+    }
+</style>
+<div style="margin-bottom: 7px;" class="text-center">
+	
+</div>
+
+
+<h5 class="text-center">
+	
+    
+    {%= __("FROM :") %}
+	{%= filters.date1 %}
+
+    {%= __("TO :") %}
+    {%= filters.date2 %}
+    <br>
+	
+    {%= __("Garden: Ghatia Tea Estate") %}
+    
+    <br>
+	
+</h5>
+
+
+
+<h2 class="text-center">{%= __("Leaf Pice Payment") %}</h2>
+<hr>
+<table class="table table-bordered">
+   <thead>
+    <tr>
+        <th class="text-center" colspan=4></th>
+        <th class="text-center" colspan=7>1st WEEK</th>
+        <th class="text-center" colspan=2></th>
+        <th class="text-center" colspan=7>2nd WEEK</th>
+        <th class="text-center" colspan=2></th>
+    <tr>  
+
+    <tr>
+        <th>Emp Code</th>
+        <th>Emp Name</th>
+        <th>Kamjari</th>
+        <th></th>
+
+        <th>01</th>
+        <th>02</th>
+        <th>03</th>
+        <th>04</th>
+        <th>05</th>
+        <th>06</th>
+        <th>07</th>
+
+        <th>Leaf</th>
+        <th>Amount</th>
+
+
+        <th>08</th>
+        <th>09</th>
+        <th>10</th>
+        <th>11</th>
+        <th>12</th>
+        <th>13</th>
+        <th>14</th>
+
+        <th>Leaf</th>
+        <th>Amount</th>
+        
+
+
+
+        
+    </tr>  
+
+
+      
+    
+    </thead>
+
+
+    <tbody>
+        {% for(var i=0, l=report.data.length; i<l; i++) { %}
+            
+            <tr>
+                
+                <td class="text-left">{%= report.data[i].emp_code %}</td>
+                <td class="text-left">{%= report.data[i].emp_name %}</td>
+                <td class="text-left">{%= report.data[i].sirdar %}</td>
+                <td class="text-left">{%= report.data[i].a %}</td>
+                
+                
+                
+
+
+
+
+                <td class="text-left">{%=format_currency(report.data[i].day1)%}</td>
+                <td class="text-left">{%= format_currency(report.data[i].day2) %}</td>
+                <td class="text-left">{%= format_currency(report.data[i].day3) %}</td>
+                <td class="text-left">{%= format_currency(report.data[i].day4) %}</td>
+                <td class="text-left">{%= format_currency(report.data[i].day5) %}</td>
+                <td class="text-left">{%= format_currency(report.data[i].day6) %}</td>
+                <td class="text-left">{%= format_currency(report.data[i].day7) %}</td>
+
+                
+                <td class="text-left">{%= report.data[i].wk1_task %}</td>
+                <td class="text-left">{%= report.data[i].wk1_task_amt %}</td>
+                
+                <td class="text-left">{%=format_currency(report.data[i].day8)%}</td>
+                <td class="text-left">{%= format_currency(report.data[i].day9) %}</td>
+                <td class="text-left">{%= format_currency(report.data[i].day10) %}</td>
+                <td class="text-left">{%= format_currency(report.data[i].day11) %}</td>
+                <td class="text-left">{%= format_currency(report.data[i].day12) %}</td>
+                <td class="text-left">{%= format_currency(report.data[i].day13) %}</td>
+                <td class="text-left">{%= format_currency(report.data[i].day14) %}</td>
+
+                <td class="text-left">{%= report.data[i].wk2_task %}</td>
+                <td class="text-left">{%= report.data[i].wk2_task_amt %}</td>
+
+
+            </tr>   
+             
+        {% } %}
+       
+    </tbody>
+    
+</table>

@@ -1,0 +1,90 @@
+<style>
+    .print-format table, .print-format tr,
+    .print-format td, .print-format div, .print-format p {
+        font-family: Monospace;
+        line-height: 200%;
+        vertical-align: middle;
+    }
+
+    @media screen {
+        .print-format {
+            max-width: 13in;
+            padding: 0.25in;
+            min-height: 8.5in;
+        }
+    }
+</style>
+<div style="margin-bottom: 7px;" class="text-center">
+	
+</div>
+
+
+<h5 class="text-center">
+	
+    
+    {%= __("FROM :") %}
+	{%= filters.date1 %}
+
+    {%= __("TO :") %}
+    {%= filters.date2 %}
+    <br>
+	
+    {%= __("Garden: Ghatia Tea Estate") %}
+    
+    <br>
+	
+</h5>
+
+
+
+<h2 class="text-center">{%= __("Consoladate Statement") %}</h2>
+<hr>
+<table class="table table-bordered">
+    <thead>
+       
+    <tr>
+       
+        
+        <th>Book Code</th>
+        <th>Pay</th>
+        <th>Leaf Piece</th>
+        <th>Sick</th>
+        <th>Maternity</th>
+        <th>Other</th>
+        <th>Total Earn</th>
+
+        <th>PF</th>
+        <th>AVD</th>
+        <th>Kharcha</th>
+        <th>Ration</th>
+        <th>Deducted Value</th>
+        <th>Net Pay</th>
+        
+    
+ </tr>
+    </thead>
+    <tbody>
+        {% for(var i=0, l=report.data.length; i<l; i++) { %}
+            <tr>
+               
+               
+                <td class="text-left">{%= report.data[i].book_code %}</td>
+                <td class="text-left">{%= report.data[i].pay %}</td>
+                <td class="text-left">{%= report.data[i].l_piece %}</td>
+                <td class="text-left">{%= report.data[i].sick %}</td>
+                <td class="text-left">{%= report.data[i].mat %}</td>
+                <td class="text-left">{%= report.data[i].oth %}</td>
+                <td class="text-left">{%= report.data[i].tot_earn %}</td>
+
+                <td class="text-left">{%= report.data[i].pf %}</td>
+                <td class="text-left">{%= report.data[i].adv %}</td>
+                <td class="text-left">{%= report.data[i].kharcha %}</td>
+                <td class="text-left">{%= report.data[i].ration %}</td>
+                <td class="text-left">{%= report.data[i].deducted_value %}</td>
+                <td class="text-left">{%= report.data[i].net_pay %}</td>
+                
+
+            </tr>   
+        {% } %}
+    </tbody>
+</table>
