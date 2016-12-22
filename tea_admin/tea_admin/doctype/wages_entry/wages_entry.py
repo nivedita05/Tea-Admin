@@ -41,19 +41,17 @@ class WagesEntry(Document):
 
 			pay = frappe.db.sql("""select pay from `tabSalary Structure` where book_code=%s""",(self.book_code))
 			if pay:
-				if(i.attendence=="PRESENT" or i.attendence=="HOLIDAY"):
+				if(i.attendence=="PRESENT" or i.attendence=="HOLIDAY" or i.attendence=="LEAVE"):
 					i.pay =str(round(pay[0][0],2))
 				
 				elif (i.attendence=="HALF DAY"):
+					pay=frappe.db.sql("""select half_pay from `tabSalary Structure` where book_code=%s""",(self.book_code))
 					i.pay =str(round(pay[0][0]/2,2))
 			
-			#elif (i.attendence=="SICK"):
-				#i.pay =str(round(pay[0][0]*2/3,2))
-
-				elif (i.attendence=="LEAVE"):
-					i.pay =	"0.0"
-
-
+				elif (i.attendence=="SICK"):
+					pay=frappe.db.sql("""select sick from `tabSalary Structure` where book_code=%s""",(self.book_code))
+					i.pay =str(round(pay[0][0]/2,2))
+			
 				else:
 					i.pay="0.0"
 

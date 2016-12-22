@@ -23,6 +23,8 @@ def execute(filters=None):
 
 		emp_category_and_pf_no=get_category_and_pf_no(i.emp_code,filters)
 		attendence=get_attendence(i.emp_code,filters)
+		leave=get_attendence_leave(i.emp_code,filters)
+		holiday=get_attendence_holiday(i.emp_code,filters)
 		special=get_attendence_special(i.emp_code,filters)
 		normal=get_attendence_normal(i.emp_code,filters)
 
@@ -34,21 +36,16 @@ def execute(filters=None):
 		leave_pay=get_leave_pay(i.emp_code,filters)
 		other=get_other(i.emp_code,filters)
 
+		
+		advance=get_adv(i.emp_code,filters)
+
+
+
+
 		total_add=pay[0][0]+fc[0][0]+l_piece[0][0]+sick[0][0]+maternity[0][0]+leave_pay[0][0]+other[0][0]
-
-		p_per_fund=pay[0][0]*0.12
-		kharcha=get_kharcha(i.emp_code,filters)
-		lp_paid=get_lp_paid(i.emp_code,filters)
-		advance=get_advance(i.emp_code,filters)
-		ration=get_ration(i.emp_code,filters)
-		lic=get_lic(i.emp_code,filters)
-
-
-		total_sub=p_per_fund+kharcha[0][0]+lp_paid[0][0]+advance[0][0]+ration[0][0]+lic[0][0]
-	
-		net_amount=total_add-total_sub
-
-		data.append([i.emp_code,i.name1,emp_category_and_pf_no[0][0],attendence,special,normal,emp_category_and_pf_no[0][1],pay,fc,l_piece,sick,maternity,leave_pay,other,total_add,p_per_fund,kharcha,lp_paid,advance,ration,lic,total_sub,net_amount])
+		pf=round(total_add*0.12,2)
+		net_amount=total_add-(pf+advance[0][0])
+		data.append([i.emp_code,i.name1,emp_category_and_pf_no[0][0],attendence[0][0]+leave[0][0]+holiday[0][0],special,normal,emp_category_and_pf_no[0][1],pay,fc,l_piece,sick,maternity,leave_pay,other,total_add,pf,advance,net_amount,net_amount])
 	
 
 	return columns,data
@@ -62,7 +59,13 @@ def get_category_and_pf_no(emp_code,filters):
 	return frappe.db.sql("""select category,pf_no from `tabLabour Information` where emp_id=%s and garden=%s""",(emp_code,filters.garden))
 
 def get_attendence(emp_code,filters):
-	return frappe.db.sql("""select count(emp_code) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
+	return frappe.db.sql("""select count(emp_code) from `tabattendence` where date between %s and %s and emp_code=%s and attendence="PRESENT" """,(filters.date1,filters.date2,emp_code))
+
+def get_attendence_leave(emp_code,filters):
+	return frappe.db.sql("""select count(emp_code) from `tabattendence` where date between %s and %s and emp_code=%s and attendence="LEAVE" """,(filters.date1,filters.date2,emp_code))
+
+def get_attendence_holiday(emp_code,filters):
+	return frappe.db.sql("""select count(emp_code) from `tabattendence` where date between %s and %s and emp_code=%s and attendence="HOLIDAY" """,(filters.date1,filters.date2,emp_code))
 
 def get_attendence_special(emp_code,filters):
 	return frappe.db.sql("""select count(emp_code) from `tabattendence` where date between %s and %s and emp_code=%s and attendance_3rd_char_1="SPECIAL" """,(filters.date1,filters.date2,emp_code))
@@ -78,7 +81,7 @@ def get_fc(emp_code,filters):
 	return frappe.db.sql("""select sum(food_conssesion) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
 
 def get_l_piece(emp_code,filters):
-	return frappe.db.sql("""select sum(l_piece) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
+	return frappe.db.sql("""select sum(incentive) from `tabPayment` where  emp_code=%s""",(emp_code))
 
 def get_sick(emp_code,filters):
 	return frappe.db.sql("""select sum(sick) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
@@ -94,26 +97,8 @@ def get_other(emp_code,filters):
 	return frappe.db.sql("""select sum(other) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
 
 
-
-
-
-
-def get_kharcha(emp_code,filters):
-	return frappe.db.sql("""select sum(kharcha) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
-
-def get_lp_paid(emp_code,filters):
-	return frappe.db.sql("""select sum(lp_paid) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
-
-def get_ration(emp_code,filters):
-	return frappe.db.sql("""select sum(ration) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
-
-
-def get_lic(emp_code,filters):
-	return frappe.db.sql("""select sum(lic) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
-
-def get_advance(emp_code,filters):
-	return frappe.db.sql("""select sum(advance) from `tabattendence` where date between %s and %s and emp_code=%s""",(filters.date1,filters.date2,emp_code))
-
+def get_adv(emp_code,filters):
+	return frappe.db.sql("""select sum(deducted_advance_amount) from `tabPayment` where  emp_code=%s""",(emp_code))
 
 
 
@@ -255,23 +240,6 @@ def get_columns():
 	    })
 
 
-	    	columns.append({
-				"fieldname": "kharcha",
-				"label": _("Kharcha"),
-				"fieldtype": "Float",
-				"option":"Salary Structure",
-				"width": 90
-	    })
-
-
-	    	columns.append({
-				"fieldname": "lp_paid",
-				"label": _("Lp Paid"),
-				"fieldtype": "Float",
-				"option":"Salary Structure",
-				"width": 90
-	    })
-
 
 	    	columns.append({
 				"fieldname": "advance",
@@ -282,24 +250,7 @@ def get_columns():
 	    })
 
 
-	    	columns.append({
-				"fieldname": "ration",
-				"label": _("Ration"),
-				"fieldtype": "Float",
-				"option":"Salary Structure",
-				"width": 90
-	    })
-
-
-
-	    	columns.append({
-				"fieldname": "lic",
-				"label": _("LIC"),
-				"fieldtype": "Float",
-				"option":"Salary Structure",
-				"width": 90
-	    })
-
+	
 	    	columns.append({
 				"fieldname": "total_deduction",
 				"label": _("After Deduction"),

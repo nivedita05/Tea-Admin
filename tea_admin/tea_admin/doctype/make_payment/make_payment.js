@@ -82,7 +82,9 @@ get_employees:function (frm) {
             var row = frappe.model.add_child(frm.doc, frm.fields_dict.pay.df.options, frm.fields_dict.pay.df.fieldname);
             row.emp_name = r.message[i].name1;
             row.emp_code= r.message[i].emp_id;
-          
+            row.to_date= frm.$emp_dialog.get_value('to_date');
+            row.from_date= frm.$emp_dialog.get_value('from_date');
+            row.book_code= frm.$emp_dialog.get_value('book_code');
             
           }
         }

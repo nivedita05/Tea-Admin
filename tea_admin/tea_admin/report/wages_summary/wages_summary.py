@@ -19,20 +19,23 @@ def execute(filters=None):
 	net_pay=0
 
 	rep=get_report_entries(filters)
+	adv=get_adv(filters)
 	
 	add_total=rep[0][0]+rep[0][1]+rep[0][2]+rep[0][3]+rep[0][4]
-	total_sub=rep[0][0]*0.12+rep[0][5]+rep[0][6]+rep[0][7]+rep[0][8]+rep[0][9]+rep[0][10]
+	total_sub=rep[0][0]*0.12+adv[0][0]
+	
 	net_pay=add_total-total_sub
 	
-	data.append([rep[0][0],rep[0][1],rep[0][2],rep[0][3],rep[0][4],add_total,rep[0][0]*0.12,rep[0][5],rep[0][6],rep[0][7],rep[0][8],rep[0][9],rep[0][10],total_sub,net_pay])
+	data.append([rep[0][0],rep[0][1],rep[0][2],rep[0][3],rep[0][4],add_total,rep[0][0]*0.12,adv,total_sub,net_pay])
 	
 	return columns, data
 
 
 def get_report_entries(filters):
-	return frappe.db.sql("""select sum(pay),sum(l_piece),sum(sick),sum(maternity),sum(other),sum(advance),sum(kharcha),sum(ration),sum(lic),sum(lp_paid),sum(p_per_fund) from `tabattendence` group by book_code having book_code=%s """,(filters.book_code))
+	return frappe.db.sql("""select sum(pay),sum(l_piece),sum(sick),sum(maternity),sum(other) from `tabattendence` group by book_code having book_code=%s """,(filters.book_code))
 
-
+def get_adv(filters):
+	return frappe.db.sql("""select sum(deducted_advance_amount) from `tabPayment` group by book_code having book_code=%s """,(filters.book_code))
 
 
 def get_columns():
@@ -95,42 +98,7 @@ def get_columns():
 				"width": 80
 	    })
 
-	    	columns.append({
-				"fieldname": "kharcha",
-				"label": _("Kharcha"),
-				"fieldtype": "Data",
-				"width": 80
-	    })
-
 	    	
-	    	columns.append({
-				"fieldname": "ration",
-				"label": _("Ration"),
-				"fieldtype": "Data",
-				"width": 80
-	    })
-
-	    	columns.append({
-				"fieldname": "lic",
-				"label": _("LIC"),
-				"fieldtype": "Data",
-				"width": 80
-	    })
-
-	    	columns.append({
-				"fieldname": "lp_paid",
-				"label": _("Lp Paid"),
-				"fieldtype": "Data",
-				"width": 80
-	    })
-
-	    	columns.append({
-				"fieldname": "p_fund",
-				"label": _("P/Fund"),
-				"fieldtype": "Data",
-				"width": 80
-	    })
-
 	    	columns.append({
 				"fieldname": "deducted_value",
 				"label": _("Deducted Value"),

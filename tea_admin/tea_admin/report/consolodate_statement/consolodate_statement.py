@@ -48,7 +48,7 @@ def execute(filters=None):
 		ration=get_sum_ration(i.book_code)[0][0]
 		lic=get_sum_lic(i.book_code)[0][0]
 
-		total_sub=pf+advance+kharcha+ration+lic
+		total_sub=pf
 
 		net_pay=total_add-total_sub
 
