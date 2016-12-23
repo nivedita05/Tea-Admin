@@ -40,7 +40,6 @@ def get_data():
 					"name": "Labour Information",
 					"description": _("Default settings for buying transactions.")
 				}
-		
 		]
 		},
 

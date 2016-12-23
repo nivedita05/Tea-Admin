@@ -17,34 +17,40 @@ from dateutil.relativedelta import relativedelta
 class SalaryforStaff(Document):
 	
 	def validate(self):
+		self.get_basic()
 		self.get_hra()
-		self.get_vda()
 		self.get_da()
+		self.get_vda()
 		self.get_elf()
-		self.get_salary()
+		self.get_add_total()
 
-
+	def get_basic(self):
+		get_basic=frappe.db.sql("""select basic from `tabSalary Staff` where emp_name=%s""",(self.emp_name))
+		self.basic=get_basic
+		return self.basic
 
 	def get_hra(self):
+		basic=self.get_basic()
 		get_hra=frappe.db.sql("""select hra from `tabSalary Structure` where book_code=%s""",(self.book_code))
-		self.hra=(get_hra[0][0]*int(self.basic))/100
-
-	def get_vda(self):
-		get_vda=frappe.db.sql("""select vda from `tabSalary Structure` where book_code=%s""",(self.book_code))
-		self.vda=(get_vda[0][0]*int(self.basic))/100
-
+		self.hra=round((get_hra[0][0]*int(basic[0][0]))/100,2)
+		return self.hra
+	
 	def get_da(self):
+		basic=self.get_basic()
 		get_da=frappe.db.sql("""select da from `tabSalary Structure` where book_code=%s""",(self.book_code))
-		self.da=(get_da[0][0]*int(self.basic))/100
-
+		self.da=round((get_da[0][0]*int(basic[0][0]))/100,2)
+		return self.da
+	
+	def get_vda(self):
+		basic=self.get_basic()
+		get_vda=frappe.db.sql("""select vda from `tabSalary Structure` where book_code=%s""",(self.book_code))
+		self.vda=round((get_vda[0][0]*int(basic[0][0]))/100,2)
+		return self.vda
+	
 	def get_elf(self):
 		get_elf=frappe.db.sql("""select elf from `tabSalary Structure` where book_code=%s""",(self.book_code))
-		self.alw=get_elf[0][0]
+		self.elf=get_elf[0][0]
+		return self.elf
 
-	def get_salary(self):
-		get_hra=frappe.db.sql("""select hra from `tabSalary Structure` where book_code=%s""",(self.book_code))
-		get_vda=frappe.db.sql("""select vda from `tabSalary Structure` where book_code=%s""",(self.book_code))
-		get_da=frappe.db.sql("""select da from `tabSalary Structure` where book_code=%s""",(self.book_code))
-		get_elf=frappe.db.sql("""select elf from `tabSalary Structure` where book_code=%s""",(self.book_code))
-
-		self.salary=int(self.basic)+(get_hra[0][0]*int(self.basic))/100+(get_vda[0][0]*int(self.basic))/100+(get_da[0][0]*int(self.basic))/100+get_elf[0][0]
+	def get_add_total(self):
+		pass
