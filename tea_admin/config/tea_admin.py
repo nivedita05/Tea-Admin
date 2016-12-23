@@ -19,6 +19,12 @@ def get_data():
 					"type": "doctype",
 					"name": "Make Payment",
 					"description": _("Default settings for buying transactions.")
+				},
+
+				{
+					"type": "doctype",
+					"name": "Salary for Staff",
+					"description": _("Default settings for buying transactions.")
 				}
 		
 		]
