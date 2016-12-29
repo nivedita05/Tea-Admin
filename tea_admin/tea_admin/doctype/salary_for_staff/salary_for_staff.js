@@ -6,3 +6,8 @@ frappe.ui.form.on('Salary for Staff', {
 
 	}
 });
+frappe.ui.form.on("Salary for Staff", "validate", function(frm) {
+    frm.naming_ser="";
+    name=frm.doc.emp_code+"/"+frm.doc.date;
+    frm.set_value("naming_ser",name);
+});

@@ -21,17 +21,34 @@ def get_data():
 					"description": _("Default settings for buying transactions.")
 				},
 
-				{
-					"type": "doctype",
-					"name": "Salary for Staff",
-					"description": _("Default settings for buying transactions.")
-				}
 		
 		]
 		},
 
 
 		{
+			"label": _("Staff"),
+			"icon": "icon-cog",
+			"items": [
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Staff Salary Report",
+					"doctype": "Salary for Staff",
+				},
+
+
+				{
+					"type": "doctype",
+					"name": "Salary for Staff",
+					"description": _("Default settings for buying transactions.")
+				}
+			]
+		},
+
+
+
+			{
 			"label": _("Setup files"),
 			"icon": "icon-cog",
 			"items": [
@@ -44,39 +61,19 @@ def get_data():
 		},
 
 
-		{
-			"label": _("Benefits Information"),
-			"icon": "icon-cog",
-			"items": [
-				{
-					"type": "doctype",
-					"name": "Medical Benefit Entry",
-					"description": _("Default settings for buying transactions.")
-				},
-
-				{
-					"type": "doctype",
-					"name": "Other Benefit Entry",
-					"description": _("Default settings for buying transactions.")
-				}
-		
-		]
-		},
 
 		{
-			"label": _("House Information"),
+			"label": _("Payment"),
 			"icon": "icon-cog",
 			"items": [
-				{
+			{
 					"type": "doctype",
-					"name": "House Repairing Entry",
-					"description": _("Default settings for buying transactions.")
+					"name": "Make Payment",
+					
 				}
-
 				
-		]
+			]
 		},
-
 
 		{
 			"label": _("Leave"),
@@ -92,7 +89,18 @@ def get_data():
 		]
 		},
 
-		
+		{
+			"label": _("Attendance"),
+			"icon": "icon-cog",
+			"items": [
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Attendance Sheet",
+					"doctype": "Wages Entry",
+				}
+			]
+		},
 
 		{
 			"label": _("Ration"),
@@ -109,11 +117,49 @@ def get_data():
 		},
 
 
-
-
-
-
 		{
+			"label": _("House Information"),
+			"icon": "icon-cog",
+			"items": [
+				{
+					"type": "doctype",
+					"name": "House Repairing Entry",
+					"description": _("Default settings for buying transactions.")
+				}
+
+				
+		]
+		},
+
+		
+		{
+			"label": _("Medical Reports"),
+			"icon": "icon-cog",
+			"items": [
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Sick Register",
+					"doctype": "Wages Entry",
+				}
+			]
+		},
+
+		
+		{
+			"label": _("LIC"),
+			"icon": "icon-cog",
+			"items": [
+			{
+					"type": "doctype",
+					"name": "Lic File",
+					
+				}
+				
+			]
+		},
+
+				{
 			"label": _("Reports"),
 			"icon": "icon-cog",
 			"items": [
@@ -149,47 +195,32 @@ def get_data():
 		},
 
 
+		
+
+		
+
+
+
 		{
-			"label": _("Attendance"),
+			"label": _("Benefits Information"),
 			"icon": "icon-cog",
 			"items": [
 				{
-					"type": "report",
-					"is_query_report": True,
-					"name": "Attendance Sheet",
-					"doctype": "Wages Entry",
-				}
-			]
-		},
-
-
-		{
-			"label": _("Payment"),
-			"icon": "icon-cog",
-			"items": [
-			{
 					"type": "doctype",
-					"name": "Make Payment",
-					
-				}
-				
-			]
-		},
+					"name": "Medical Benefit Entry",
+					"description": _("Default settings for buying transactions.")
+				},
 
-
-
-		{
-			"label": _("Medical Reports"),
-			"icon": "icon-cog",
-			"items": [
 				{
-					"type": "report",
-					"is_query_report": True,
-					"name": "Sick Register",
-					"doctype": "Wages Entry",
+					"type": "doctype",
+					"name": "Other Benefit Entry",
+					"description": _("Default settings for buying transactions.")
 				}
-			]
+		
+		]
 		},
+
+
 
 
 

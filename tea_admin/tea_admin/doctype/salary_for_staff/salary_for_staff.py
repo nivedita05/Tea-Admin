@@ -39,15 +39,15 @@ class SalaryforStaff(Document):
 		self.get_wl_fare()
 		self.get_sub_total()
 
-
 		self.get_gross_salary()
+		self.get_net_salary()
 
 	def get_basic(self):
 
 		get_basic=frappe.db.sql("""select basic from `tabSalary Staff` where emp_name=%s""",(self.emp_name))
 		now = datetime.datetime.now()
 		days = calendar.monthrange(now.year, now.month)[1]
-		self.basic=(int(get_basic[0][0])*int(self.days_present))/days
+		self.basic=(int(float(get_basic[0][0]))*int(self.days_present))/days
 		return self.basic
 
 	def get_hra(self):
@@ -150,7 +150,9 @@ class SalaryforStaff(Document):
 		pass
 
 	def get_lic(self):
-		pass
+		get_lic=frappe.db.sql("""select lic from `tabLic File` where emp_name=%s""",(self.emp_name))
+		self.lic=get_lic[0][0]
+		return self.lic
 
 	def get_ration(self):
 		pass
@@ -164,22 +166,36 @@ class SalaryforStaff(Document):
 		p_tax=self.get_p_tax()
 		mis_ded=self.get_mis_ded()
 		rev=self.get_rev()
+		lic=self.get_lic()
 
-		get_sub_total=float(p_tax)+float(pf)+float(mis_ded)+float(rev)
+		get_sub_total=float(p_tax)+float(pf)+float(mis_ded)+float(rev)+float(lic)
 		self.ded_total=round(get_sub_total,2)
 		return self.ded_total
 
 
+	
+
 	def get_gross_salary(self):
-		add=self.get_add_total()
+		get_basic=self.get_basic()
+		get_da=self.get_da()
+		get_vda=self.get_vda()
+		get_alw=self.get_alw()
+		get_oth=self.get_oth()
+
+		add=float(get_basic)+float(get_da)+float(get_vda)+float(get_alw)+float(get_oth)
+		gross_total=float(add)
+		self.gross_salary=round(gross_total,2)
+		return self.gross_salary
+
+    
+    	
+	def get_net_salary(self):
+
+		add=self.get_gross_salary()
 		sub=self.get_sub_total()
 		net_total=float(add)-float(sub)
 		self.net_salary=round(net_total,2)
 		return self.net_salary
-
-
-    
-    	
 
 
     	
