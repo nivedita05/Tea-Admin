@@ -11,10 +11,17 @@ from frappe import utils
 def execute(filters=None):
 	data = []
 	columns = get_columns()
-	
+
+	add=get_add_fileld(filters)
+	for i in add:
+		data.append([i.emp_code,i.emp_name,i.days_present,i.basic,i.da,i.vda,i.allowence,i.other,i.fc,i.hra,i.elf
+			,i.salary,i.pf,i.p_tax,i.advance,i.rev,i.lic,i.ration,i.welfare_fund,i.mislleneous_ded,i.ded_total,i.gross_salary,i.net_salary])
 	return columns, data
 
-
+def get_add_fileld(filters):
+	return frappe.db.sql("""select emp_code,emp_name,days_present,basic,da,vda,allowence,
+		other,fc,hra,elf,salary,pf,p_tax,advance,rev,lic,ration,welfare_fund,mislleneous_ded,ded_total,
+		gross_salary,net_salary from `tabSalary for Staff` where date=%s and book_code=%s""",(filters.date,filters.book_code),as_dict=1)
 
 def get_columns():
 		

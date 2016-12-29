@@ -1,0 +1,148 @@
+<style>
+    .print-format table, .print-format tr,
+    .print-format td, .print-format div, .print-format p {
+        font-family: Monospace;
+        line-height: 200%;
+        vertical-align: middle;
+    }
+
+    @media screen {
+        .print-format {
+            max-width: 13in;
+            padding: 0.25in;
+            min-height: 8.5in;
+        }
+    }
+</style>
+<div style="margin-bottom: 7px;" class="text-center">
+    
+</div>
+
+
+<h5 class="text-center">
+  <b>  {%= ("STAFF SALARY") %}
+    {%= __(":") %}
+    {%= filters.garden %}
+    <br>
+    {%= __("Date ") %}
+    {%= __(":") %}
+    {%= filters.date %}
+    <br>
+    {%= __("Book ") %}
+    {%= __(":") %}
+    {%= filters.book_code %}
+  <br>
+</b>
+
+</h5>
+<hr></hr>
+
+<table class="table table-bordered">
+    <thead>
+    
+
+    <tr>
+        <th class="text-center" colspan=3></th>
+        <th class="text-center" colspan=8>ADDITIVE FIELDS</th>
+        <th class="text-center" colspan=1></th>
+        <th class="text-center" colspan=8>DEDUCTIVE FIELDS</th>
+        <th class="text-center" colspan=1></th>
+    <tr>  
+
+      
+    <tr>
+        
+        <th>Emp Code</th>
+        <th>Emp Name</th>
+        <th>Days</th>
+       
+        
+        <th>BASIC</th>
+        <th>DA</th>
+        <th>VDA</th>
+        <th>ALLOWENCE</th>
+        <th>OTHER</th>
+        <th>FC</th>
+        <th>HRA</th>
+        <th>EL</th>
+        
+        <th>TOTAL</th>
+        
+
+        <th>PF</th>
+        <th>P/TAX</th>
+        <th>ADV</th>
+        <th>REVENUE</th>
+        <th>LIC</th>
+        <th>RATION</th>
+        <th>WL FARE</th>
+        <th>MIS DED</th>
+        
+        <th>TOTAL</th>
+       
+
+       
+        
+        
+     </tr>
+    </thead>
+    <tbody>
+        {% for(var i=0, l=report.data.length; i<l; i++) { %}
+            
+            <tr>
+                
+                <td class="text-left">{%= report.data[i].emp_code %}</td>
+                <td class="text-left">{%= report.data[i].emp_name %}</td>
+                <td class="text-left">{%= report.data[i].days %}</td>
+               
+                
+                
+                
+                <td class="text-left">{%= report.data[i].basic %}</td>
+                <td class="text-left">{%= report.data[i].da %}</td>
+                <td class="text-left">{%= report.data[i].vda %}</td>
+                <td class="text-left">{%= report.data[i].allowence %}</td>
+                <td class="text-left">{%= report.data[i].other %}</td>
+                <td class="text-left">{%= report.data[i].fc %}</td>
+                <td class="text-left">{%= report.data[i].hra %}</td>
+                <td class="text-left">{%= report.data[i].el %}</td>
+                <td class="text-left">{%= report.data[i].add_total %}</td>
+
+
+
+                
+                
+
+                <td class="text-left">{%= report.data[i].pf %}</td>
+                <td class="text-left">{%= report.data[i].p_tax %}</td>
+                <td class="text-left">{%= report.data[i].adv %}</td>
+                <td class="text-left">{%= report.data[i].rev %}</td>
+                <td class="text-left">{%= report.data[i].lic %}</td>
+                <td class="text-left">{%= report.data[i].ration %}</td>
+                <td class="text-left">{%= report.data[i].well_fare %}</td>
+                <td class="text-left">{%= report.data[i].mis_ded %}</td>
+                <td class="text-left">{%= report.data[i].sub_total %}</td>
+               
+
+
+            </tr>   
+             <tr>
+
+                <th colspan=10 class="text-left">Gross Pay : {%= report.data[i].gross_pay %} </th>
+                
+                <th colspan=11 class="text-left">Net Pay : {%= report.data[i].net_pay %} </th>
+                
+                
+             </tr>
+             <tr><td colspan=21></td></tr>
+
+             
+        {% } %}
+       
+    </tbody>
+</table>
+
+
+
+
+
