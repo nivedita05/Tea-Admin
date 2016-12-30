@@ -155,7 +155,9 @@ class SalaryforStaff(Document):
 		return self.lic
 
 	def get_ration(self):
-		pass
+		get_basic=self.get_basic()
+		self.ration=float(get_basic)*0.0014
+		return self.ration
 
 	def get_wl_fare(self):
 		pass
@@ -167,8 +169,9 @@ class SalaryforStaff(Document):
 		mis_ded=self.get_mis_ded()
 		rev=self.get_rev()
 		lic=self.get_lic()
+		ration=self.get_ration()
 
-		get_sub_total=float(p_tax)+float(pf)+float(mis_ded)+float(rev)+float(lic)
+		get_sub_total=float(p_tax)+float(pf)+float(mis_ded)+float(rev)+float(lic)+float(ration)
 		self.ded_total=round(get_sub_total,2)
 		return self.ded_total
 
