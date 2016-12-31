@@ -21,6 +21,11 @@ class LeaveAllocation(Document):
 		
 		from_date=datetime.strptime(self.from_date,'%Y-%m-%d')
 		to_date=datetime.strptime(self.to_date,'%Y-%m-%d')
-		diff=abs(to_date.date()-from_date.date()).days
-		self.allocated_days=diff
-		return self.allocated_days
+		if (to_date<from_date):
+			frappe.throw("Please enter the date correctly, from date can't be greater than to date")
+		if (to_date>=from_date):
+			diff=abs(to_date.date()-from_date.date()).days
+			self.allocated_days=diff
+			return self.allocated_days
+			
+			
