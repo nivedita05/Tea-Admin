@@ -83,6 +83,18 @@ def get_data():
 					"type": "doctype",
 					"name": "Leave Application",
 					"description": _("Default settings for buying transactions.")
+				},
+
+				{
+					"type": "doctype",
+					"name": "Leave Type",
+					"description": _("Default settings for buying transactions.")
+				},
+
+				{
+					"type": "doctype",
+					"name": "Leave Allocation",
+					"description": _("Default settings for buying transactions.")
 				}
 
 				
