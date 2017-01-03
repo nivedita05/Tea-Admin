@@ -1,0 +1,73 @@
+<style>
+    .print-format table, .print-format tr,
+    .print-format td, .print-format div, .print-format p {
+        font-family: Monospace;
+        line-height: 200%;
+        vertical-align: middle;
+    }
+
+    @media screen {
+        .print-format {
+            max-width: 13in;
+            padding: 0.25in;
+            min-height: 8.5in;
+        }
+    }
+</style>
+<div style="margin-bottom: 7px;" class="text-center">
+	
+</div>
+
+
+<h4 class="text-center">
+	
+    
+    {%= __("FROM DATE:") %}
+	{%= filters.date1 %}
+	<br>
+    {%= __("TO DATE:") %}
+    {%= filters.date2 %}
+    <br>
+	
+    {%= __("Garden:") %}
+    {%= filters.garden %}
+    <br>
+	
+</h4>
+
+
+
+<h3 class="text-center">{%= __("Provisional Tax Report") %}</h3>
+<hr>
+<table class="table table-bordered">
+    <thead>
+       
+    <tr>
+        <th>Sr No.</th>
+        <th>Emp Code</th>
+        <th>Emp Name</th>
+        
+        <th>Provisional Tax Amount</th>
+       
+       
+    
+ </tr>
+    </thead>
+    <tbody>
+        {% for(var i=0, l=report.data.length; i<l; i++) { %}
+            <tr>
+                <td class="text-center">{%= i %}</td>
+              
+                <td class="text-left">{%= report.data[i].emp_code %}</td>
+                <td class="text-left">{%= report.data[i].name1 %}</td>
+                
+                <td class="text-left">{%= report.data[i].p_tax %}</td>
+                
+                
+
+
+
+            </tr>   
+        {% } %}
+    </tbody>
+</table>

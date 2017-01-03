@@ -233,6 +233,34 @@ def get_data():
 		},
 
 
+		{
+			"label": _("Provisional Tax"),
+			"icon": "icon-cog",
+			"items": [
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Provisional Tax Report",
+					"doctype": "Salary for Staff",
+				}
+			]
+		},
+
+		{
+			"label": _("Kamjari"),
+			"icon": "icon-cog",
+			"items": [
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Kamjari Statement",
+					"doctype": "Labour Information",
+				}
+			]
+		},
+
+
+
 
 
 
