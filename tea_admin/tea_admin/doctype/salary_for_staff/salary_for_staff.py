@@ -198,6 +198,8 @@ class SalaryforStaff(Document):
 		sub=self.get_sub_total()
 		net_total=float(add)-float(sub)
 		self.net_salary=round(net_total,2)
+		if self.net_salary<0:
+			self.net_salary="0.0"
 		return self.net_salary
 
 

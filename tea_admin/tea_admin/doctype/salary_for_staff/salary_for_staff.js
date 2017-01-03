@@ -11,3 +11,11 @@ frappe.ui.form.on("Salary for Staff", "validate", function(frm) {
     name=frm.doc.emp_code+"/"+frm.doc.date;
     frm.set_value("naming_ser",name);
 });
+
+cur_frm.fields_dict['emp_code'].get_query = function(doc) {
+  return {
+    filters: [
+			['Labour Information', 'enabled', '=', 'Active']
+		]
+  }
+}

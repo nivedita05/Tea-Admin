@@ -28,8 +28,6 @@ cur_frm.fields_dict['attendence'].grid.get_field('emp_code').get_query = functio
 
 
 
-
-
 frappe.ui.form.on('Wages Entry', {
 
 refresh: function(frm) {

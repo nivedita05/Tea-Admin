@@ -122,6 +122,13 @@ def get_data():
 					"type": "doctype",
 					"name": "Ration Distribution",
 					"description": _("Default settings for buying transactions.")
+				},
+
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Ration Register",
+					"doctype": "Ration Distribution",
 				}
 
 				
@@ -153,7 +160,15 @@ def get_data():
 					"is_query_report": True,
 					"name": "Sick Register",
 					"doctype": "Wages Entry",
+				},
+
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Maternity Register",
+					"doctype": "Wages Entry",
 				}
+
 			]
 		},
 
