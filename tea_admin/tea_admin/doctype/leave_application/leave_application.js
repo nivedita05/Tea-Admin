@@ -6,3 +6,12 @@ frappe.ui.form.on('Leave Application', {
 
 	}
 });
+
+cur_frm.fields_dict['emp_code'].get_query = function(doc) {
+  return {
+    filters: [
+			['Labour Information', 'enabled', '=', 'Active']
+		]
+  }
+}
+

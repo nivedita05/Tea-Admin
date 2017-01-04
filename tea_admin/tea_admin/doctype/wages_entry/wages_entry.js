@@ -20,7 +20,10 @@ cur_frm.fields_dict['attendence'].grid.get_field('emp_code').get_query = functio
     var d = locals[cdt][cdn]
     return {
         filters: [
+
+            ['Labour Information', 'enabled', '=', 'Active'],
             ['Labour Information', 'book_code', '=', doc.book_code]
+            
         ]
     }
 }
@@ -45,9 +48,11 @@ frm.$emp_dialog = new frappe.ui.Dialog({
   fields: [
     {fieldname:'date', fieldtype:'Date', label: __('Date')},
     {fieldname:'book_code', fieldtype:'Link', options: 'Salary Structure', label: __('Book Code')},
-    {fieldname:'garden', fieldtype:'Link', options: 'Estate', label: __('Garden')}
+    {fieldname:'garden', fieldtype:'Link', options: 'Estate', label: __('Garden')},
+    {fieldname:'enabled',fieldtype:'Select',options:['Active','Inactive'],label: __('Status')}
     
   ]
+
 });
 frm.$emp_dialog.set_primary_action(__("Add"), function() {
   frm.trigger('get_employees');
@@ -134,4 +139,5 @@ frappe.ui.form.on("Wages Entry", "validate", function(frm) {
     
    }
  });
+
 

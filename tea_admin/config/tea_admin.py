@@ -49,13 +49,20 @@ def get_data():
 
 
 			{
-			"label": _("Setup files"),
+			"label": _("Labours & Family"),
 			"icon": "icon-cog",
 			"items": [
 				{
 					"type": "doctype",
 					"name": "Labour Information",
 					"description": _("Default settings for buying transactions.")
+				},
+
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Family Information Report",
+					"doctype": "Labour Information",
 				}
 		]
 		},
