@@ -41,6 +41,7 @@ frm.$emp_dialog = new frappe.ui.Dialog({
   	{fieldname:'payment_date', fieldtype:'Date', label: __('Payment Date')},
     {fieldname:'book_code', fieldtype:'Link', options: 'Salary Structure', label: __('Book Code')},
     {fieldname:'garden', fieldtype:'Link', options: 'Estate', label: __('Garden')},
+    {fieldname:'enabled', fieldtype:'Select', options: ['Active','Inactive'], label: __('Status')},
     
   ]
 });

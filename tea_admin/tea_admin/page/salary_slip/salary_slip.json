@@ -1,0 +1,22 @@
+{
+ "content": null, 
+ "creation": "2017-01-04 16:20:16.513422", 
+ "docstatus": 0, 
+ "doctype": "Page", 
+ "idx": 0, 
+ "modified": "2017-01-04 16:20:18.572435", 
+ "modified_by": "Administrator", 
+ "module": "Tea Admin", 
+ "name": "salary-slip", 
+ "owner": "Administrator", 
+ "page_name": "Salary Slip", 
+ "roles": [
+  {
+   "role": "Administrator"
+  }
+ ], 
+ "script": null, 
+ "standard": "Yes", 
+ "style": null, 
+ "title": "Salary Slip"
+}

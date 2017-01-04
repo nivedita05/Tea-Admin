@@ -33,8 +33,9 @@ class MakePayment(Document):
 		for i in self.get('pay'):
 			payment_amount = frappe.db.sql("""select sum(pay)+sum(food_conssesion)+sum(l_piece)+sum(sick)+sum(maternity)+sum(leave_pay)+sum(other) from `tabattendence` where emp_code=%s and book_code=%s and date between %s and %s""",(i.emp_code,self.book_code,self.from_date,self.to_date))
 			if payment_amount:
-				i.payment_amount=round(payment_amount[0][0],2)#-i.deducted_advance_amount
-
+				i.payment_amount=payment_amount[0][0]
+			else:
+				i.payment_amount="0.0"
 
 	def get_pf(self):
 		for i in self.get('pay'):
@@ -97,7 +98,7 @@ class MakePayment(Document):
 		for i in self.get('pay'):
 			payment_amount = frappe.db.sql("""select sum(pay)+sum(food_conssesion)+sum(l_piece)+sum(sick)+sum(maternity)+sum(leave_pay)+sum(other) from `tabattendence` where emp_code=%s and book_code=%s and date between %s and %s""",(i.emp_code,self.book_code,self.from_date,self.to_date))
 			if payment_amount:	
-				i.payment_amount=round(payment_amount[0][0],2)
+				i.payment_amount=payment_amount[0][0]
 
 
 			deducted_advance_amount = frappe.db.sql("""select deducted_denomination from `tabAdvance Entry` where emp_code=%s""",(i.emp_code))
@@ -107,7 +108,8 @@ class MakePayment(Document):
 			if base_task:
 				if task_done:
 					i.incentive=float(task_done[0][0])-float(base_task[0][0])
-					if i.incentive<=6:
+					
+					if i.incentive>=1 and i.incentive<=6:
 						i.incentive=i.incentive*3
 						i.paid_amount=i.payment_amount+i.incentive
 						pf_no=frappe.db.sql("""select pf_no from `tabLabour Information` where emp_id=%s""",(i.emp_code))
@@ -126,7 +128,7 @@ class MakePayment(Document):
 					elif i.incentive>6:
 						i.incentive=18+(i.incentive-6)*3.5
 						i.paid_amount=i.payment_amount+i.incentive
-						if i.pf_no == "N/A":
+						if i.pf_no == "0":
 							if deducted_advance_amount:
 								i.paid_amount=round((i.payment_amount+i.incentive)-round(deducted_advance_amount[0][0],2),2)
 							else:

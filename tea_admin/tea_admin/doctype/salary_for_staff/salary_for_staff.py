@@ -147,16 +147,18 @@ class SalaryforStaff(Document):
 		return self.rev
 
 	def get_advance(self):
-		pass
-
+		get_advance=frappe.db.sql("""select advance from `tabSalary Staff` where emp_name=%s""",(self.emp_name))
+		self.advance=get_advance[0][0]
+		return self.advance
+	
 	def get_lic(self):
 		get_lic=frappe.db.sql("""select lic from `tabLic File` where emp_name=%s""",(self.emp_name))
 		self.lic=get_lic[0][0]
 		return self.lic
 
 	def get_ration(self):
-		get_basic=self.get_basic()
-		self.ration=float(get_basic)*0.0014
+		get_ration=frappe.db.sql("""select ration from `tabSalary Staff` where emp_name=%s""",(self.emp_name))
+		self.ration=get_ration[0][0]
 		return self.ration
 
 	def get_wl_fare(self):
@@ -170,8 +172,9 @@ class SalaryforStaff(Document):
 		rev=self.get_rev()
 		lic=self.get_lic()
 		ration=self.get_ration()
+		advance=self.get_advance()
 
-		get_sub_total=float(p_tax)+float(pf)+float(mis_ded)+float(rev)+float(lic)+float(ration)
+		get_sub_total=float(p_tax)+float(pf)+float(mis_ded)+float(rev)+float(lic)+float(ration)+float(advance)
 		self.ded_total=round(get_sub_total,2)
 		return self.ded_total
 

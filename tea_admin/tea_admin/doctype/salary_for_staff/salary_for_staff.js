@@ -3,9 +3,18 @@
 
 frappe.ui.form.on('Salary for Staff', {
 	refresh: function(frm) {
+    frm.add_custom_button(__("Make Salary Slip"),function () {
+      frm.trigger('make_salary')
+    })
+	},
 
-	}
+  make_salary:function (frm) {
+
+    frappe.set_route("salary-slip")
+}
 });
+
+
 frappe.ui.form.on("Salary for Staff", "validate", function(frm) {
     frm.naming_ser="";
     name=frm.doc.emp_code+"/"+frm.doc.date;
@@ -19,3 +28,5 @@ cur_frm.fields_dict['emp_code'].get_query = function(doc) {
 		]
   }
 }
+
+

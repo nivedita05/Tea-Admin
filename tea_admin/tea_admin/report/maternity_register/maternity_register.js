@@ -3,6 +3,36 @@
 
 frappe.query_reports["Maternity Register"] = {
 	"filters": [
+	{
+            "fieldname":"date1",
+            "label": __("FROM DATE"),
+            "fieldtype": "Date",
+            "options": "",
+            "default": frappe.datetime.get_today(),
+            "reqd":1
+        },
+
+    {
+            "fieldname":"date2",
+            "label": __(" TO DATE"),
+            "fieldtype": "Date",
+            "options": "",
+            "default": frappe.datetime.get_today(),
+            "reqd":1
+        },
+	{
+
+            "fieldname":"garden",
+            "label": __("Garden"),
+            "fieldtype": "Link",
+            "options":"Estate",
+            "default":"",
+            "reqd":1
+
+
+
+        }
+
 
 	]
 }
