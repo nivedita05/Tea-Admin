@@ -113,7 +113,10 @@ class SalaryforStaff(Document):
 		get_alw=self.get_alw()
 		get_oth=self.get_oth()
 		get_salary=float(get_basic)+float(get_da)+float(get_vda)+float(get_fc)+float(get_alw)+float(get_oth)
-		self.pf=round(get_salary*0.12,2)
+		if get_salary>=15000:
+			self.pf=1800
+		else:
+			self.pf=round(get_salary*0.12,2)
 		return self.pf
 
 	def get_p_tax(self):

@@ -42,6 +42,13 @@ def get_data():
 					"type": "doctype",
 					"name": "Salary for Staff",
 					"description": _("Default settings for buying transactions.")
+				},
+
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Salary slip",
+					"doctype": "Salary for Staff",
 				}
 			]
 		},
