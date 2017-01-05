@@ -37,6 +37,13 @@ def get_data():
 					"type": "doctype",
 					"name": "Other Benefit Entry",
 					"description": _("Default settings for buying transactions.")
+				},
+
+
+				{
+					"type": "doctype",
+					"name": "Advance Entry",
+					"description": _("Default settings for buying transactions.")
 				}
 
 
@@ -44,7 +51,7 @@ def get_data():
 		]
 		},
 
-		
+
 			{
 			"label": _("Setup Files"),
 			"icon": "icon-cog",
@@ -123,7 +130,7 @@ def get_data():
 
 
 		{
-			"label": _("Reports"),
+			"label": _("Reports "),
 			"icon": "icon-cog",
 			"items": [
 				
@@ -162,6 +169,24 @@ def get_data():
 					"doctype": "Salary for Staff",
 				},
 
+				
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Provisional Tax Report",
+					"doctype": "Salary for Staff",
+				}
+
+				
+			]
+		},
+
+			{
+			"label": _("Reports"),
+			"icon": "icon-cog",
+			"items": [
+				
+				
 				{
 					"type": "report",
 					"is_query_report": True,
@@ -176,13 +201,7 @@ def get_data():
 					"doctype": "Wages Entry",
 				},
 
-				{
-					"type": "report",
-					"is_query_report": True,
-					"name": "Provisional Tax Report",
-					"doctype": "Salary for Staff",
-				},
-
+				
 				{
 					"type": "report",
 					"is_query_report": True,
@@ -215,6 +234,7 @@ def get_data():
 				}
 			]
 		}
+
 
 
 	]
