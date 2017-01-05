@@ -21,23 +21,61 @@ def get_data():
 					"description": _("Default settings for buying transactions.")
 				},
 
+				{
+					"type": "doctype",
+					"name": "House Repairing Entry",
+					"description": _("Default settings for buying transactions.")
+				},
+
+				{
+					"type": "doctype",
+					"name": "Medical Benefit Entry",
+					"description": _("Default settings for buying transactions.")
+				},
+
+				{
+					"type": "doctype",
+					"name": "Other Benefit Entry",
+					"description": _("Default settings for buying transactions.")
+				}
+
+
 		
 		]
 		},
+
+		
+			{
+			"label": _("Setup Files"),
+			"icon": "icon-cog",
+			"items": [
+				{
+					"type": "doctype",
+					"name": "Labour Information",
+					"description": _("Default settings for buying transactions.")
+				},
+
+				{
+					"type": "doctype",
+					"name": "Ration Distribution",
+					"description": _("Default settings for buying transactions.")
+				},
+				{
+					"type": "doctype",
+					"name": "Lic File",
+					
+				}
+
+		]
+		},
+
 
 
 		{
 			"label": _("Staff"),
 			"icon": "icon-cog",
 			"items": [
-				{
-					"type": "report",
-					"is_query_report": True,
-					"name": "Staff Salary Report",
-					"doctype": "Salary for Staff",
-				},
-
-
+				
 				{
 					"type": "doctype",
 					"name": "Salary for Staff",
@@ -55,39 +93,6 @@ def get_data():
 
 
 
-			{
-			"label": _("Labours & Family"),
-			"icon": "icon-cog",
-			"items": [
-				{
-					"type": "doctype",
-					"name": "Labour Information",
-					"description": _("Default settings for buying transactions.")
-				},
-
-				{
-					"type": "report",
-					"is_query_report": True,
-					"name": "Family Information Report",
-					"doctype": "Labour Information",
-				}
-		]
-		},
-
-
-
-		{
-			"label": _("Payment"),
-			"icon": "icon-cog",
-			"items": [
-			{
-					"type": "doctype",
-					"name": "Make Payment",
-					
-				}
-				
-			]
-		},
 
 		{
 			"label": _("Leave"),
@@ -115,92 +120,9 @@ def get_data():
 		]
 		},
 
-		{
-			"label": _("Attendance"),
-			"icon": "icon-cog",
-			"items": [
-				{
-					"type": "report",
-					"is_query_report": True,
-					"name": "Attendance Sheet",
-					"doctype": "Wages Entry",
-				}
-			]
-		},
-
-		{
-			"label": _("Ration"),
-			"icon": "icon-cog",
-			"items": [
-				{
-					"type": "doctype",
-					"name": "Ration Distribution",
-					"description": _("Default settings for buying transactions.")
-				},
-
-				{
-					"type": "report",
-					"is_query_report": True,
-					"name": "Ration Register",
-					"doctype": "Ration Distribution",
-				}
-
-				
-		]
-		},
 
 
 		{
-			"label": _("House Information"),
-			"icon": "icon-cog",
-			"items": [
-				{
-					"type": "doctype",
-					"name": "House Repairing Entry",
-					"description": _("Default settings for buying transactions.")
-				}
-
-				
-		]
-		},
-
-		
-		{
-			"label": _("Medical Reports"),
-			"icon": "icon-cog",
-			"items": [
-				{
-					"type": "report",
-					"is_query_report": True,
-					"name": "Sick Register",
-					"doctype": "Wages Entry",
-				},
-
-				{
-					"type": "report",
-					"is_query_report": True,
-					"name": "Maternity Register",
-					"doctype": "Wages Entry",
-				}
-
-			]
-		},
-
-		
-		{
-			"label": _("LIC"),
-			"icon": "icon-cog",
-			"items": [
-			{
-					"type": "doctype",
-					"name": "Lic File",
-					
-				}
-				
-			]
-		},
-
-				{
 			"label": _("Reports"),
 			"icon": "icon-cog",
 			"items": [
@@ -231,54 +153,60 @@ def get_data():
 					"is_query_report": True,
 					"name": "Leaf Pice Payment",
 					"doctype": "Salary Structure",
-				}
-			]
-		},
-
-
-		
-
-		
-
-
-
-		{
-			"label": _("Benefits Information"),
-			"icon": "icon-cog",
-			"items": [
-				{
-					"type": "doctype",
-					"name": "Medical Benefit Entry",
-					"description": _("Default settings for buying transactions.")
 				},
 
 				{
-					"type": "doctype",
-					"name": "Other Benefit Entry",
-					"description": _("Default settings for buying transactions.")
-				}
-		
-		]
-		},
+					"type": "report",
+					"is_query_report": True,
+					"name": "Staff Salary Report",
+					"doctype": "Salary for Staff",
+				},
 
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Sick Register",
+					"doctype": "Wages Entry",
+				},
 
-		{
-			"label": _("Provisional Tax"),
-			"icon": "icon-cog",
-			"items": [
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Maternity Register",
+					"doctype": "Wages Entry",
+				},
+
 				{
 					"type": "report",
 					"is_query_report": True,
 					"name": "Provisional Tax Report",
 					"doctype": "Salary for Staff",
-				}
-			]
-		},
+				},
 
-		{
-			"label": _("Kamjari"),
-			"icon": "icon-cog",
-			"items": [
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Attendance Sheet",
+					"doctype": "Wages Entry",
+				},
+
+
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Ration Register",
+					"doctype": "Ration Distribution",
+				}
+
+				,
+
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Family Information Report",
+					"doctype": "Labour Information",
+				},
+
 				{
 					"type": "report",
 					"is_query_report": True,
@@ -286,12 +214,7 @@ def get_data():
 					"doctype": "Labour Information",
 				}
 			]
-		},
-
-
-
-
-
+		}
 
 
 	]
