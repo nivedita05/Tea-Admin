@@ -108,8 +108,23 @@ class MakePayment(Document):
 			if base_task:
 				if task_done:
 					i.incentive=float(task_done[0][0])-float(base_task[0][0])
-					
-					if i.incentive>=1 and i.incentive<=6:
+
+					if i.incentive < -6:
+						i.incentive=(i.incentive+6)*3.5-18
+						i.paid_amount=i.payment_amount+i.incentive
+						if i.pf_no == "0":
+							if deducted_advance_amount:
+								i.paid_amount=round((i.payment_amount+i.incentive)-round(deducted_advance_amount[0][0],2),2)
+							else:
+								i.paid_amount=round((i.payment_amount+i.incentive),2)
+						else:
+							if deducted_advance_amount:
+								i.paid_amount=round((i.payment_amount+i.incentive)*0.88-round(deducted_advance_amount[0][0],2),2)
+							else:
+								i.paid_amount=round(round((i.payment_amount+i.incentive),2)*0.88,2)
+			
+
+					if (i.incentive<=0 and i.incentive>-6):
 						i.incentive=i.incentive*3
 						i.paid_amount=i.payment_amount+i.incentive
 						pf_no=frappe.db.sql("""select pf_no from `tabLabour Information` where emp_id=%s""",(i.emp_code))
@@ -125,6 +140,25 @@ class MakePayment(Document):
 							else:
 								i.paid_amount=round(round((i.payment_amount+i.incentive),2)*0.88,2)
 					
+
+					if (i.incentive>=1 and i.incentive<=6):
+						i.incentive=i.incentive*3
+						i.paid_amount=i.payment_amount+i.incentive
+						pf_no=frappe.db.sql("""select pf_no from `tabLabour Information` where emp_id=%s""",(i.emp_code))
+						i.pf_no=pf_no[0][0]
+						if i.pf_no == "0":
+							if deducted_advance_amount:
+								i.paid_amount=round((i.payment_amount+i.incentive)-round(deducted_advance_amount[0][0],2),2)
+							else:
+								i.paid_amount=round((i.payment_amount+i.incentive),2)
+						else:
+							if deducted_advance_amount:
+								i.paid_amount=round((i.payment_amount+i.incentive)*0.88-round(deducted_advance_amount[0][0],2),2)
+							else:
+								i.paid_amount=round(round((i.payment_amount+i.incentive),2)*0.88,2)
+					
+					
+					
 					elif i.incentive>6:
 						i.incentive=18+(i.incentive-6)*3.5
 						i.paid_amount=i.payment_amount+i.incentive
@@ -138,7 +172,7 @@ class MakePayment(Document):
 								i.paid_amount=round((i.payment_amount+i.incentive)*0.88-round(deducted_advance_amount[0][0],2),2)
 							else:
 								i.paid_amount=round(round((i.payment_amount+i.incentive),2)*0.88,2)
-	
+			
 
 	def get_cancelled(self):# if some data is submitted and there after someone want to delete it
 		for i in self.get('pay'):

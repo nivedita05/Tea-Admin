@@ -182,7 +182,7 @@
    "print_hide_if_no_value": 0, 
    "read_only": 0, 
    "report_hide": 0, 
-   "reqd": 1, 
+   "reqd": 0, 
    "search_index": 0, 
    "set_only_once": 0, 
    "unique": 0
@@ -373,7 +373,7 @@
  "issingle": 0, 
  "istable": 1, 
  "max_attachments": 0, 
- "modified": "2016-12-31 13:32:41.261828", 
+ "modified": "2017-01-05 13:13:32.992024", 
  "modified_by": "Administrator", 
  "module": "Tea Admin", 
  "name": "Payment", 

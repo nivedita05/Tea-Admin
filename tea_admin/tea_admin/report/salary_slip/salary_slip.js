@@ -9,7 +9,7 @@ frappe.query_reports["Salary slip"] = {
             "fieldname":"date",
             "label": __(" DATE"),
             "fieldtype": "Date",
-            "options": "",
+            "options":"",
             "default": frappe.datetime.get_today(),
             "reqd":1
         },
